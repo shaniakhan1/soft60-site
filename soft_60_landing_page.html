@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soft60</title>
+  <style>
+    :root {
+      --cream: #f7f1e7;
+      --warm: #efe4d1;
+      --sand: #dcc7a1;
+      --gold: #b8860b;
+      --gold-soft: #d6b25e;
+      --brown: #4b3429;
+      --taupe: #7c6a5d;
+      --white: #fffdfa;
+      --shadow: 0 18px 40px rgba(75, 52, 41, 0.12);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(212, 178, 94, 0.22), transparent 28%),
+        linear-gradient(180deg, #fbf7f0 0%, var(--cream) 52%, #f4ecdf 100%);
+      color: var(--brown);
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--brown);
+    }
+
+    .brand-badge {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #f9f1e2 12%, #d8b159 50%, #fff1cf 100%);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      font-style: italic;
+      color: #9b6b08;
+    }
+
+    .brand-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-link {
+      color: var(--taupe);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 34px;
+      align-items: center;
+      padding: 26px 0 10px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.75);
+      color: var(--taupe);
+      font-size: 0.83rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 25px rgba(75, 52, 41, 0.06);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      max-width: 10ch;
+    }
+
+    .lede {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--taupe);
+      max-width: 56ch;
+      margin-bottom: 26px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      box-shadow: 0 10px 25px rgba(75, 52, 41, 0.08);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #b8860b 0%, #d0a548 100%);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.82);
+      color: var(--brown);
+      border: 1px solid rgba(124, 106, 93, 0.16);
+    }
+
+    .micro {
+      color: var(--taupe);
+      font-size: 0.96rem;
+      line-height: 1.65;
+    }
+
+    .hero-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(255,255,255,0.88) 0%, rgba(250, 242, 228, 0.88) 100%);
+      border: 1px solid rgba(255,255,255,0.72);
+      border-radius: 34px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(212, 178, 94, 0.28), transparent 35%);
+      pointer-events: none;
+    }
+
+    .phone-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .phone {
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 18px 32px rgba(75, 52, 41, 0.12);
+      background: #fff;
+    }
+
+    .phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section {
+      padding: 78px 0 12px;
+    }
+
+    .section h2 {
+      margin: 0 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .section-intro {
+      color: var(--taupe);
+      max-width: 64ch;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(124, 106, 93, 0.1);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 10px 24px rgba(75, 52, 41, 0.05);
+    }
+
+    .feature h3 {
+      margin: 0 0 10px;
+      font-size: 1.06rem;
+      letter-spacing: 0.01em;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--taupe);
+      line-height: 1.65;
+    }
+
+    .invite {
+      margin: 80px 0 26px;
+      padding: 34px;
+      border-radius: 34px;
+      background: linear-gradient(140deg, rgba(255,255,255,0.78) 0%, rgba(239, 228, 209, 0.9) 100%);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .invite p {
+      margin: 0;
+      color: var(--taupe);
+      line-height: 1.7;
+      max-width: 58ch;
+    }
+
+    footer {
+      padding: 14px 0 34px;
+      color: var(--taupe);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .features { grid-template-columns: 1fr; }
+      .invite { grid-template-columns: 1fr; }
+      .phone-grid { max-width: 580px; margin: 0 auto; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 18px; }
+      .topbar { margin-bottom: 16px; }
+      .hero { gap: 22px; }
+      h1 { max-width: none; }
+      .lede { font-size: 1rem; }
+      .phone-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .cta-row { flex-direction: column; }
+      .hero-card { padding: 16px; border-radius: 24px; }
+      .invite { padding: 24px; border-radius: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="#top" aria-label="Soft60 home">
+        <div class="brand-badge" style="padding:0; background:none; box-shadow:none;"><img src="logo.png" alt="Soft60 logo" style="width:54px; height:54px; border-radius:18px; object-fit:cover;"/></div>
+        <div class="brand-name">Soft60</div>
+      </a>
+      <a class="nav-link" href="https://app.frequencyplanner.com/">Already inside? Open the app</a>
+    </div>
+
+    <section class="hero" id="top">
+      <div>
+        <div class="eyebrow">Invite-only founding access</div>
+        <h1>What if the most powerful thing you could do was soften?</h1>
+        <p class="lede">
+          Soft60 is a private daily practice for women who want to feel regulated, grounded, and magnetic without another harsh routine. Inside, you’ll find nervous system support, guided rituals, daily reflection, and a softer way to change your life.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://apps.apple.com/app/id6760143125" target="_blank" rel="noopener noreferrer">Download on Apple</a>
+          <a class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.frequencyplanner.soft60&hl=en_US" target="_blank" rel="noopener noreferrer">Download on Google</a>
+        </div>
+        <p class="micro">
+          Access is being released intentionally. If you feel called to this, step in now. Entry is limited.
+        </p>
+      </div>
+
+      <div class="hero-card">
+        <div class="phone-grid">
+          <div class="phone">
+            <img src="screen1.png" alt="Soft60 app screen" />
+          </div>
+          <div class="phone">
+            <img src="screen2.png" alt="Soft60 app screen" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>A softer operating system for your life.</h2>
+      <p class="section-intro">
+        This is not a challenge built on force. It is a return to your body, your standards, and your self-trust. Soft60 helps you regulate daily, create proof of change, and move through life with more calm power.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <h3>Daily rituals</h3>
+          <p>Morning and evening practices, gentle reflection, and guided prompts that help you stay connected to yourself.</p>
+        </div>
+        <div class="feature">
+          <h3>Nervous system support</h3>
+          <p>Breathwork, meditations, and reset moments designed to help you feel safer, steadier, and less reactive.</p>
+        </div>
+        <div class="feature">
+          <h3>Identity-based change</h3>
+          <p>Track your progress, build proof, and create a softer relationship with discipline, abundance, and personal growth.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="invite">
+      <div>
+        <h2 style="margin-bottom:12px; font-size: clamp(1.8rem, 2.4vw, 2.5rem);">Private. Intentional. Already changing lives.</h2>
+        <p>
+          Soft60 is being opened carefully. The experience is invite-led, the tone is different, and the women entering now are shaping what this becomes. If it speaks to you, step in while founding access is still open.
+        </p>
+      </div>
+      <div class="cta-row" style="margin-bottom:0; min-width: min(100%, 320px);">
+        <a class="btn btn-primary" href="https://apps.apple.com/app/id6760143125" target="_blank" rel="noopener noreferrer">Apple App Store</a>
+        <a class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.frequencyplanner.soft60&hl=en_US" target="_blank" rel="noopener noreferrer">Google Play</a>
+      </div>
+    </section>
+
+    <footer>
+      Soft60 by Shania Khan
+    </footer>
+  </div>
+</body>
+</html>
