@@ -686,16 +686,16 @@
       btn.disabled = true;
 
       try {
-        const res = await fetch('https://app.frequencyplanner.com/api/waitlist', {
+        // Call the tRPC joinWaitlist endpoint — adds to Flodesk Soft60APP Waitlist segment,
+        // sends confirmation email, and saves to the in-app waitlist database.
+        await fetch('https://app.frequencyplanner.com/api/trpc/community.joinWaitlist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email })
+          body: JSON.stringify({ json: { email } })
         });
-
-        document.getElementById('form-fields').style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
       } catch (e) {
-        // Still show success to user even if network fails
+        // Non-fatal — show success regardless
+      } finally {
         document.getElementById('form-fields').style.display = 'none';
         document.getElementById('form-success').style.display = 'block';
       }
